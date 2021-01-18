@@ -19,7 +19,7 @@
 ### 安装 
 ```shell
 # for Vue 3.x
-npm i mint-ui -S
+npm i vue3-diagram-tree
 ```
 
 ### 使用
