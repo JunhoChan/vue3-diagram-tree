@@ -4,17 +4,22 @@ import treeData from "./data"
 
 import React from "react"
 
-let App = () => (
+const App:React.Fc = () => (
   <div>
-     <h1>水平树</h1>
+     <h2>horizonal Demo</h2>
       <ReactDiagramTree
-        type="horizontal"
+        type="horizonal"
         treeData={treeData}
-        layer={2}
+        layer={3}
         enableExpand={true}
         style={{margin: "0 auto", padding: '20px'}}
       />
-     
+     <h2>verticle Demo</h2>
+     <ReactDiagramTree
+        type="verticle"
+        treeData={treeData}
+        style={{margin: "0 auto", padding: '20px'}}
+      />
   </div>
 )
 

@@ -25,19 +25,19 @@ const config = {
                 babelrc: false,
                 presets: [
                   // 添加 preset-react
-                  require.resolve('@babel/preset-react'),
                   require.resolve('@babel/preset-env'),
-                  // [require.resolve('@babel/preset-env'), {modules: false}]
+                  require.resolve('@babel/preset-react'),
+                  require.resolve('@babel/preset-typescript'),
                 ],
                 cacheDirectory: true
               }
             }
           },
-          {
-            test: /\.(ts|tsx)?$/,
-            exclude: /node_modules/,
-            loader: 'ts-loader'
-          },
+          // {
+          //   test: /\.(ts|tsx)?$/,
+          //   exclude: /node_modules/,
+          //   loader: 'ts-loader'
+          // },
           ...cssRules,
         ],
       },

@@ -1,7 +1,7 @@
 /**
  * 用于创建节点钩子组件
  */
-import React from 'react'
+import React, { useState } from 'react'
 export declare interface DiagramTreeDataType {
   id: string
   title: string
@@ -18,7 +18,7 @@ const renderValidChildNode = (childData: DiagramTreeDataType[], layer: number) =
         })
       : null
     return (
-        <div class="tree-node-children">
+        <div className="tree-node-children">
             {childNodes}
         </div>
     )
@@ -27,28 +27,35 @@ const renderValidChildNode = (childData: DiagramTreeDataType[], layer: number) =
 /**
  * @description create single node
  */
+import { Consumer } from "./index"
 const createNodeElement = (treeData: DiagramTreeDataType, isSingle: boolean, layer?: number) => {
+  const [data, setData] = useState(treeData)
   const toggleExpand = () => {
-    treeData.noExpand = !treeData.noExpand
+    data.noExpand = !data.noExpand
+    setData({...data})
   }
-  // const enableExpand = inject("enableExpand", false)
-  const enableExpand = false
     return (
-        <div class={['diagram-tree-node', {
-          'is-expand': !treeData.noExpand,
-          'is-single': isSingle,
-          'is-empty-child': !treeData.children || treeData.children.length === 0
-        }]}>
-            <div class="diagram-tree-node-label">
-              {treeData.title}
-              { enableExpand ?
-                <button
-                title={treeData.noExpand ? "展开" : "隐藏"}
-                class="diagram-tree-node-btn" onClick={toggleExpand}>
-                { treeData.noExpand ? "+" : "-" }
-              </button> : null }
+        <div
+          key={data.id}
+          className={`diagram-tree-node
+          ${!data.noExpand ? 'is-expand' : ''}
+          ${isSingle ? 'is-single' : ''}
+          ${!data.children || data.children.length === 0 ? 'is-empty-child' : '' }
+        `}>
+            <div className="diagram-tree-node-label">
+              {data.title}
+              <Consumer>
+                {(enableExpand: boolean) => (
+                    enableExpand ?
+                  <button
+                    title={data.noExpand ? "展开" : "隐藏"}
+                    className="diagram-tree-node-btn" onClick={toggleExpand}>
+                     { data.noExpand ? "+" : "-" }
+                  </button> : null
+                )}
+              </Consumer>
             </div>
-            {renderValidChildNode(treeData.children, layer + 1)}
+            {renderValidChildNode(data.children, layer + 1)}
         </div>
     )
 }

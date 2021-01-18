@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { DiagramTreeDataType } from "./node"
+import React from 'react';
+import { DiagramTreeDataType, createOrganizationalTree } from "./node"
 import "./index.scss"
 
 interface DiagramTreeType {
@@ -8,17 +8,31 @@ interface DiagramTreeType {
   enableExpand?: boolean
   treeData: Array<DiagramTreeDataType>
 }
-class DiagramTree extends Component<DiagramTreeType> {
-  name: "ReactDiagramTree"
+export const {Provider,Consumer} = React.createContext("default");
+const DiagramTree: React.FC = (props: DiagramTreeType) => {
+  const { type, enableExpand, treeData, layer  } = props
+  const cacheTreeData = JSON.parse(JSON.stringify(treeData))
+  let currentLayer = 0,
+      quaee = [] // store level data
   
-  
-  render() {
-    return (213
-      // <div class={['jh-diagram-tree', type === 'verticle' ? 'is-verticle' : 'is-horizonal']}>
-      //   {createOrganizationalTree(cacheTreeData, enableExpand)}
-      // </div>
-    )
+  cacheTreeData.forEach((data: DiagramTreeDataType) => quaee.push(data))
+  while(layer > 0 && currentLayer < layer) {
+    let newQuaee = []
+    currentLayer++
+    quaee.forEach((item: DiagramTreeDataType) => {
+      if (currentLayer === layer) item.noExpand = true
+      newQuaee = newQuaee.concat(item.children || [])
+    })
+    quaee = newQuaee
   }
+  const className = type === 'verticle' ? 'is-verticle' : 'is-horizonal'
+  return (
+    <Provider value={enableExpand}>
+      <div className={`jh-diagram-tree ${className}`}>
+          {createOrganizationalTree(cacheTreeData, enableExpand)}
+      </div>
+    </Provider>
+  )  
 }
 
 export default DiagramTree
