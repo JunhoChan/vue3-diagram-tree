@@ -4,8 +4,8 @@
 <br/>
 
 ### 运行效果
-<img src="./resource/verticle.png" width = "200" height = "200" />
-<img src="./resource/horizonal.png" width = "200" height = "200" />
+![aa](./resource/verticle.png)
+![aa](./resource/horizonal.png)
 
 ### 安装 
 ```shell
