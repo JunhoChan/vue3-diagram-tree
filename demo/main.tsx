@@ -11,9 +11,9 @@ export default defineComponent({
       return () => (
         <div style={{width: "100%", height: "100%", display: 'flex', flexWrap: 'wrap'}}>
           <div style={{ flex: 1, margin: "20px", backgroundColor: "#fff", border: "1px solid #eee", boxShadow: "0px 0px 8px 1px rgba(153, 153, 153, 0.1)"  }}>
-            <div style="text-align:center">verticle Example</div>
+            <div style="text-align:center;margin-bottom: 20px">verticle Example</div>
             <vue-diagram-tree treeData={treeData} style={{width: "750px", height: "500px", margin: "0 auto"}} />
-            <div style="text-align:center;margin-top:50px">horizontal Example</div>
+            <div style="text-align:center;margin-top:50px;margin-bottom:20px">horizontal Example</div>
             <vue-diagram-tree
               type="horizontal"
               treeData={treeData}
