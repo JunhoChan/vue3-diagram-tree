@@ -1,5 +1,5 @@
 ## vue3-diagram-tree
-> Vue3图树展示组件
+> Vue3图树展示组件,如果需要React版本，请切换分支版本到```react-branch```
 
 <br/>
 
