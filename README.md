@@ -4,17 +4,8 @@
 <br/>
 
 ### 运行效果
-<div style="display: flex">
-  <span style="margin-right:5%">
-    <img src="./resource/verticle.png" width = "100%" height = "200" />
-    <center>水平树demo</center>
-  </span>
-  <span style="margin-right:10%">
-    <img src="./resource/horizonal.png" width = "100%" height = "200" />
-    <center>垂直树demo</center>
-  </span>
-</div>
-<br/>
+<img src="./resource/verticle.png" width = "200" height = "200" />
+<img src="./resource/horizonal.png" width = "200" height = "200" />
 
 ### 安装 
 ```shell
