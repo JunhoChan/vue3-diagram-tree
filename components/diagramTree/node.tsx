@@ -1,8 +1,7 @@
-import { inject } from "vue"
-
 /**
  * 用于创建节点钩子组件
  */
+import React from 'react'
 export declare interface DiagramTreeDataType {
   id: string
   title: string
@@ -32,7 +31,8 @@ const createNodeElement = (treeData: DiagramTreeDataType, isSingle: boolean, lay
   const toggleExpand = () => {
     treeData.noExpand = !treeData.noExpand
   }
-  const enableExpand = inject("enableExpand", false)
+  // const enableExpand = inject("enableExpand", false)
+  const enableExpand = false
     return (
         <div class={['diagram-tree-node', {
           'is-expand': !treeData.noExpand,

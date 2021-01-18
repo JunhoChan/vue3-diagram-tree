@@ -1,13 +1,12 @@
 const path = require('path')
 const cssRules = require('./cssRules')
-const { VueLoaderPlugin } = require('vue-loader')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 
 const config = {
     mode: 'development',
     devtool: 'cheap-module-eval-source-map',
-    entry: path.resolve(__dirname, './../demo/index.js'),
+    entry: path.resolve(__dirname, './../demo/main.tsx'),
     stats: "verbose",
     output: {
       path: path.resolve(__dirname, './../dist'),
@@ -17,44 +16,45 @@ const config = {
     module: {
         rules: [
           {
-            test: /\.vue$/,
-            use: 'vue-loader',
+            test: /\.(ts|tsx)$/, // jsx/js文件的正则
+            exclude: /node_modules/, // 排除 node_modules 文件夹
+            use: {
+              loader: 'babel-loader',
+              options: {
+                // babel 转义的配置选项
+                babelrc: false,
+                presets: [
+                  // 添加 preset-react
+                  require.resolve('@babel/preset-react'),
+                  require.resolve('@babel/preset-env'),
+                  // [require.resolve('@babel/preset-env'), {modules: false}]
+                ],
+                cacheDirectory: true
+              }
+            }
           },
           {
-            test: /\.(ts|js)x?$/,
+            test: /\.(ts|tsx)?$/,
             exclude: /node_modules/,
-            loader: 'babel-loader',
-          },
-          {
-            test: /\.tsx?$/,
-            use: [
-              {
-                loader: 'ts-loader',
-              },
-            ],
+            loader: 'ts-loader'
           },
           ...cssRules,
         ],
       },
       resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.vue', '.json'],
+        extensions: ['.ts', '.tsx', '.js', '.json'],
         alias: {
             "@components": path.join(__dirname, '..', 'components'),
-            // vue: 'vue/dist/vue.esm-browser.js',
         },
       },
       plugins: [
-        new VueLoaderPlugin(),
+        // 实现热加载
+        new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
           title: 'Custom template',
           template: './demo/index.html',
           filename: './index.html'
         }),
-        new webpack.DefinePlugin({
-          // see http://link.vuejs.org/feature-flags 
-          '__VUE_OPTIONS_API__': JSON.stringify(false),
-          '__VUE_PROD_DEVTOOLS__': JSON.stringify(false)
-        })
       ],
       devServer: {
         inline: true,

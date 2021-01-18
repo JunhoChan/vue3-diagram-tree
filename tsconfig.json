@@ -1,30 +1,33 @@
 {
-    "compilerOptions": {
-      "outDir": "./lib",
-      "module": "ESNext",
-      "declaration": true,
-      "noImplicitAny": false,
-      "removeComments": true,
-      "moduleResolution": "node",
-      "esModuleInterop": true,
-      "jsx": "preserve",
-      "noLib": false,
-      "target": "es6",
-      "sourceMap": true,
-      "lib": [
-        "ESNext", "DOM"
-      ],
-      "baseUrl": "./",
-      "paths": {
-        "@/*": ["./*"],
-        "@components/*": ["./components/*"]
-      },
-      "allowSyntheticDefaultImports": true
-    },
-    "include": [
-      "components"
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
     ],
-    "exclude": [
-      "node_modules"
-    ],
-   }
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react",
+    "experimentalDecorators": true,
+    "baseUrl": "src",
+    "noImplicitAny": false,
+    "noImplicitThis": false,
+    "strictNullChecks": false,
+    "downlevelIteration": true,
+  },
+  "include": [
+    "components",
+    "demo",
+  ],
+  "exclude": ["node_modules", "lib"]
+}
