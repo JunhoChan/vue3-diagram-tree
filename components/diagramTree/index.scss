@@ -1,0 +1,178 @@
+$border: 1px solid #BCC3DC;
+$line: 1px solid #454F66;
+@mixin content {
+  content: "";
+  position: absolute;
+  margin: 0;
+  padding: 0;
+}
+@mixin  hoverStyle {
+  cursor: pointer;
+  &:hover {
+    border: 1px solid #1890FF;
+    color: #1890FF;
+  }
+}
+
+
+.jh-diagram-tree {
+  width: 100%;
+  height: 100%;
+  .diagram-tree-node, .tree-node-children, .diagram-tree-node-label {
+    position: relative;
+    &::before, &::after {
+      @include content;
+    }
+  }
+  .tree-node-children {
+    display: none;
+  }
+  .diagram-tree-node:not(.is-expand) > .diagram-tree-node-label {
+    &::after {
+      border: none;
+    }
+  }
+  .diagram-tree-node-label {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: $border;
+    @include hoverStyle;
+  }
+}
+.diagram-tree-node-btn {
+  position: absolute;
+  background-color: transparent;
+  width: 15px;
+  height: 15px;
+  line-height: 0;
+  border-radius: 50%;
+  color: #BCC3DC;
+  outline: none;
+  border: 1px solid #BCC3DC;
+  @include hoverStyle()
+}
+
+.jh-diagram-tree[class~=is-verticle] {
+  > .diagram-tree-node {
+    display: table;
+    text-align: center;
+    margin: 0 auto;
+    & {
+      margin-bottom: 40px;
+    }
+    > .diagram-tree-node-label::before {
+      border: none;
+    }
+  }
+  .diagram-tree-node + .diagram-tree-node  {
+    padding-left: 20px;
+  }
+  .is-expand > .tree-node-children {
+    display: flex;
+    flex-grow: 0;
+    justify-content: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    flex: 0;
+    .diagram-tree-node {
+      &[class~=is-single]::before {
+        border: none;
+      }
+      &::before {
+        top: -20px;
+        left: 0px;
+        width: 100%;
+        border-top: $line;
+      }
+      &:first-child::before, &:last-child::before {
+        width: 50%;
+      }
+      &:first-child::before {
+        left: 50%;
+      }
+      &:last-child::before {
+        width: calc(50% + 10px);
+      }
+    }
+  }
+  .diagram-tree-node-label {
+    &::before, &::after {
+      top: -21px;
+      border-left: $line;
+      height: 20px;
+      left: 50%;
+    }
+    &::after {
+      top: calc(100% + 1px);
+    }
+  }
+  .is-empty-child > .diagram-tree-node-label::after {
+    border: none;
+  }
+  .diagram-tree-node-btn {
+    bottom: -18px;
+    left: calc(50% + 5px);
+  }
+  .is-empty-child .diagram-tree-node-btn {
+    display: none;
+  }
+}
+
+.jh-diagram-tree[class~=is-horizonal] {
+  .diagram-tree-node {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    & + .diagram-tree-node {
+      padding-top: 20px; 
+    }
+    &::before {
+      top: 0;
+      left: -20px;
+      border-left: $line;
+      height: 100%;
+    }
+    &:first-child::before, &:last-child::before {
+      top: 50%;
+      height: 50%;
+    }
+    &:last-child::before {
+      top: 0;
+      height: calc(50% + 10px);
+    }
+  }
+  .is-expand > .tree-node-children {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    padding-left: 20px;
+  }
+  > .diagram-tree-node::before,
+  .is-single::before,
+  .is-empty-child > .diagram-tree-node-label::after,
+  & > .diagram-tree-node > .diagram-tree-node-label::before  {
+    border: none;
+  }
+  .diagram-tree-node-label {
+    &::before, &::after {
+      left: -21px;
+      top: 50%;
+      border-top: $line;
+      width: 20px;
+    }
+    &::after {
+      left: calc(100% + 1px);
+    }
+  }
+  .diagram-tree-node-btn {
+    right: -18px;
+    bottom: calc(50% + 5px);
+  }
+  .is-empty-child .diagram-tree-node-btn {
+    display: none;
+  }
+}
+
+
+

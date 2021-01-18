@@ -1,0 +1,12 @@
+node_modules
+/demo
+/build
+
+
+package-lock.json
+*.map
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
