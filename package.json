@@ -1,6 +1,6 @@
 {
   "name": "vue3-diagram-tree",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "diagram tree component for Vue3.0",
   "main": "lib/index.js",
   "typings": "lib/diagramTree/index.d.ts",

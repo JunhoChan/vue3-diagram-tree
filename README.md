@@ -4,8 +4,8 @@
 <br/>
 
 ### 运行效果
-![aa](./resource/verticle.png)
-![aa](./resource/horizonal.png)
+![垂直树Demo](./resource/verticle.png)
+![水平树Demo](./resource/horizonal.png)
 
 ### 安装 
 ```shell
