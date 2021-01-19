@@ -9,7 +9,6 @@
 
 ### 安装 
 ```shell
-# for Vue 3.x
 npm i react-diagram-tree
 ```
 
