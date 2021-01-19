@@ -1,15 +1,11 @@
 const path = require('path')
 const cssRules = require('./cssRules')
-const { VueLoaderPlugin } = require('vue-loader')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 
 const externals = [
   {
-    vue: {
-      root: 'Vue',
-      commonjs: 'vue',
-      commonjs2: 'vue',
-    },
+    'react-router-dom': 'ReactRouterDOM',
+    'react': 'react',
   }
 ]
 
@@ -21,24 +17,46 @@ const webpackConfig = {
       publicPath: '/',
       filename: 'index.js',
       libraryTarget: 'umd',
-      library: 'VueDiagramTree',
+      library: 'ReactDiagramTree',
       umdNamedDefine: true,
     },
     module: {
       rules: [
         {
-          test: /\.vue$/,
-          use: 'vue-loader',
+          test: /\.(ts|tsx)$/, // jsx/js文件的正则
+          exclude: /node_modules/, // 排除 node_modules 文件夹
+          use: {
+            loader: 'babel-loader',
+            options: {
+              // babel 转义的配置选项
+              babelrc: false,
+              presets: [
+                // 添加 preset-react
+                require.resolve('@babel/preset-env'),
+                require.resolve('@babel/preset-react'),
+                require.resolve('@babel/preset-typescript'),//  推荐ts-lint一起使用
+              ],
+              cacheDirectory: true
+            }
+          }
         },
         {
-          test: /\.(ts|js)x?$/,
-          exclude: /node_modules/,
-          loader: 'babel-loader'
-        },
-        {
-          test: /\.(ts|tsx)?$/,
-          exclude: /node_modules/,
-          loader: 'ts-loader'
+          test: /\.(ts|tsx)$/, // jsx/js文件的正则
+          exclude: /node_modules/, // 排除 node_modules 文件夹
+          use: {
+            loader: 'babel-loader',
+            options: {
+              // babel 转义的配置选项
+              babelrc: false,
+              presets: [
+                // 添加 preset-react
+                require.resolve('@babel/preset-env'),
+                require.resolve('@babel/preset-react'),
+                require.resolve('@babel/preset-typescript'),// 配合ts-lint一起使用
+              ],
+              cacheDirectory: true
+            }
+          }
         },
         ...cssRules,
       ]
@@ -56,9 +74,7 @@ const webpackConfig = {
       ],
     },
     externals,
-    plugins: [
-      new VueLoaderPlugin(),
-    ]
+    plugins: []
 }
 
 module.exports = webpackConfig

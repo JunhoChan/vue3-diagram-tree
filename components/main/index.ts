@@ -1,5 +1,5 @@
-import VueDiagramTree from './../diagramTree'
+import ReactDiagramTree from './../diagramTree'
 
 export {
-  VueDiagramTree,
+  ReactDiagramTree,
 }

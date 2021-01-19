@@ -1,5 +1,5 @@
-## vue3-diagram-tree
-> Vue3图树展示组件
+## react-diagram-tree
+> React图树展示组件,如果需要Vue版本，请切换分支版本到```mian```
 
 <br/>
 
@@ -10,22 +10,20 @@
 ### 安装 
 ```shell
 # for Vue 3.x
-npm i vue3-diagram-tree
+npm i react-diagram-tree
 ```
 
 ### 使用
 ```js
-// global
-import vue3DiagramTree from 'vue3-diagram-tree'
-app.use(vue3DiagramTree)
-
-// single file
-import { VueDiagramTree } from 'vue3-diagram-tree'
-export default {
-  components: {
-    VueDiagramTree
-  }
-}
+import { ReactDiagramTree } from 'react-diagram-tree'
+<ReactDiagramTree
+  type="horizonal"
+  treeData={treeData}
+  layer={3}
+  enableExpand={true}
+  style={{margin: "0 auto", padding: '20px'}}
+  onNodeClick={nodeClick}
+/>
 ```
 
 ### 组件属性参考
@@ -36,4 +34,4 @@ export default {
 |layer               |  当前树图展示多少级    | Number | 0(代表全部) |
 |enableExpand        |  启用伸缩子节点按钮    | Boolean | false |
 
-* 注具体使用可查看Demo目录
+* 注具体使用可查看[Demo目录](https://github.com/JunhoChan/vue3-diagram-tree/tree/react-branch/demo)
