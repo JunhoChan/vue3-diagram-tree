@@ -37,4 +37,4 @@ export default {
 |enableExpand        |  启用伸缩子节点按钮    | Boolean | false |
 |onNodeClick          |  节点点击触发事件      | Function   |
 
-* 注具体使用可查看Demo目录
+* 注具体使用可查看[Demo目录](https://github.com/JunhoChan/vue3-diagram-tree/blob/main/demo/main.tsx)
