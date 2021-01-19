@@ -35,5 +35,6 @@ export default {
 |treeData           |  treeNodes的数据           | Array<{ id: string, title: string, noExpand: boolean, children: Array: [] }> | [] |verticle |
 |layer               |  当前树图展示多少级    | Number | 0(代表全部) |
 |enableExpand        |  启用伸缩子节点按钮    | Boolean | false |
+|onNodeClick          |  节点点击触发事件      | Function   |
 
 * 注具体使用可查看Demo目录

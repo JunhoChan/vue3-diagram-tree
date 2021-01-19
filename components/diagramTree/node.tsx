@@ -1,8 +1,7 @@
-import { inject } from "vue"
-
 /**
  * 用于创建节点钩子组件
  */
+import { inject } from "vue"
 export declare interface DiagramTreeDataType {
   id: string
   title: string
@@ -29,17 +28,27 @@ const renderValidChildNode = (childData: DiagramTreeDataType[], layer: number) =
  * @description create single node
  */
 const createNodeElement = (treeData: DiagramTreeDataType, isSingle: boolean, layer?: number) => {
-  const toggleExpand = () => {
+  const toggleExpand = (e: Event) => {
+    e.preventDefault()
+    e.stopPropagation()
     treeData.noExpand = !treeData.noExpand
   }
   const enableExpand = inject("enableExpand", false)
+  const broadcast: any = inject("Broadcast")
+  const onNodeClick = () => {
+    const newTreeData = JSON.parse(JSON.stringify(treeData))
+    delete newTreeData.noExpand
+    broadcast && broadcast.emit("node-click", newTreeData)
+  }
     return (
-        <div class={['diagram-tree-node', {
-          'is-expand': !treeData.noExpand,
-          'is-single': isSingle,
-          'is-empty-child': !treeData.children || treeData.children.length === 0
-        }]}>
-            <div class="diagram-tree-node-label">
+        <div
+          class={['diagram-tree-node', {
+            'is-expand': !treeData.noExpand,
+            'is-single': isSingle,
+            'is-empty-child': !treeData.children || treeData.children.length === 0
+          }]}
+        >
+            <div class="diagram-tree-node-label" onClick={onNodeClick}>
               {treeData.title}
               { enableExpand ?
                 <button

@@ -1,5 +1,6 @@
-import { defineComponent, PropType, provide, reactive, toRaw } from "vue"
+import { defineComponent, inject, onUnmounted, PropType, provide, reactive, toRaw } from "vue"
 import { DiagramTreeDataType, createOrganizationalTree } from "./node"
+import Broadcast from "./../utils/broadcast"
 import "./index.scss"
 
 
@@ -17,8 +18,18 @@ export default defineComponent({
     enableExpand: Boolean,
     treeData: Array as PropType<DiagramTreeDataType[]>,
   },
-  setup(props) {
+  setup(props, { emit }) {
     provide("enableExpand", props.enableExpand)
+    const bcEvent = new Broadcast()
+    provide("Broadcast", bcEvent)
+    bcEvent.on("node-click", (val: DiagramTreeDataType) => {
+      emit("nodeClick", val)
+    })
+    onUnmounted(() => {
+      inject("nodeClick")
+    })
+
+    // 广度优先遍历找对对应层级节点
     const cacheTreeData = reactive(props.treeData)
     let currentLayer = 0,
     quaee = [] // store level data
