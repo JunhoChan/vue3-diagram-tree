@@ -3,7 +3,7 @@
   "version": "0.0.2",
   "description": "diagram tree component for React",
   "main": "lib/index.js",
-  "typings": "lib/diagramTree/index.d.ts",
+  "typings": "types/index.d.ts",
   "scripts": {
     "dev": "webpack-dev-server --config ./build/dev.js",
     "clear:lib": "rimraf lib",
