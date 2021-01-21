@@ -6,6 +6,7 @@
   "typings": "lib/diagramTree/index.d.ts",
   "scripts": {
     "dev": "webpack-dev-server --config ./build/dev.js",
+    "build": "webpack --config ./build/dev.js",
     "clear:lib": "rimraf lib",
     "build:lib": "npm run clear:lib && webpack --config ./build/production.js",
     "lint": "eslint --fix ./components --ext .vue,.js,.ts",
